@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Hello Z</string>
+    <string name="property_animation">Property Animation</string>
+    <string name="recycler_view">Recycle View</string>
+</resources>
