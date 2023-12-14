@@ -2,4 +2,19 @@
     <string name="app_name">Hello Z</string>
     <string name="property_animation">Property Animation</string>
     <string name="recycler_view">Recycle View</string>
+    <string name="main_menu">主菜单</string>
+    <string name="base_use">基础用法</string>
+    <string name="advanced_use">进阶用法</string>
+    <string name="vertical">垂直</string>
+    <string name="horizontal">水平</string>
+    <string name="grid">网格</string>
+    <string name="water_fall">瀑布</string>
+    <string name="anim_alpha">透明动画</string>
+    <string name="anim_rotation">旋转动画</string>
+    <string name="anim_transX">水平平移动画</string>
+    <string name="anim_transY">竖直平移动画</string>
+    <string name="anim_rotaX">水平旋转动画</string>
+    <string name="anim_rotaY">竖直旋转动画</string>
+    <string name="anim_scaleX">水平缩放动画</string>
+    <string name="anim_scaleY">竖直缩放动画</string>
 </resources>

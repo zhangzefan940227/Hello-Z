@@ -17,28 +17,28 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginHorizontal="40dp"
-            android:text="基础用法"
+            android:text="@string/base_use"
             android:textSize="30sp" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="垂直" />
+            android:text="@string/vertical" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="水平" />
+            android:text="@string/horizontal" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="网格" />
+            android:text="@string/grid" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="瀑布" />
+            android:text="@string/water_fall" />
     </LinearLayout>
 
     <LinearLayout
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginHorizontal="40dp"
-            android:text="进阶用法"
+            android:text="@string/advanced_use"
             android:textSize="30sp" />
 
     </LinearLayout>

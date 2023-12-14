@@ -61,7 +61,6 @@ public class AnimationActivity extends AppCompatActivity {
         mScaleY.setOnClickListener(v -> {
             setAnimator("scaleY", 2000, 0, ValueAnimator.REVERSE, 1f, 0.5f, 1f);
         });
-
     }
 
     private void setAnimator(String anim, int duration, int repeatCount, int repeatMode, float... values) {
@@ -70,6 +69,5 @@ public class AnimationActivity extends AppCompatActivity {
         mAnimator.setRepeatCount(repeatCount);
         mAnimator.setRepeatMode(repeatMode);
         mAnimator.start();
-
     }
 }
