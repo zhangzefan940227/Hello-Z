@@ -17,4 +17,6 @@
     <string name="anim_rotaY">竖直旋转动画</string>
     <string name="anim_scaleX">水平缩放动画</string>
     <string name="anim_scaleY">竖直缩放动画</string>
+    <string name="notes">这是一段文本</string>
+    <string name="anim">动画</string>
 </resources>
