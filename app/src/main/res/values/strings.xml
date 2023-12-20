@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Hello Z</string>
-    <string name="property_animation">Property Animation</string>
-    <string name="recycler_view">Recycle View</string>
+    <string name="property_animation">属性动画</string>
+    <string name="recycler_view">RecyclerView</string>
     <string name="main_menu">主菜单</string>
     <string name="base_use">基础用法</string>
     <string name="advanced_use">进阶用法</string>
