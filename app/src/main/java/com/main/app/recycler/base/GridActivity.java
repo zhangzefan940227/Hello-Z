@@ -2,36 +2,60 @@ package com.main.app.recycler.base;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.main.app.R;
-import com.main.app.recycler.adapter.GridAdapter;
+import com.main.app.databinding.ActivityGridBinding;
+import com.main.app.utils.BaseAdapter;
+import com.main.app.utils.BaseViewHolder;
 
 public class GridActivity extends AppCompatActivity {
+    private ActivityGridBinding gridBinding;
+    GridLayoutManager verticalManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
+    GridLayoutManager horizontalManager = new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL, false);
+    BaseAdapter<String> gridAdapter = new BaseAdapter<>(null, new BaseAdapter.IBindDataListener<String>() {
+        @Override
+        public void onBindViewHolder(String content, BaseViewHolder viewHolder, int type, int position) {
+            viewHolder.setText(R.id.grid_rv, content);
+        }
+
+        @Override
+        public int getLayoutId(int type) {
+            return R.layout.item_list_grid;
+        }
+
+        @Override
+        public int getClickedItemId(int type) {
+            return -1;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
+
+        }
+    });
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_grid);
+        gridBinding = DataBindingUtil.setContentView(this, R.layout.activity_grid);
+        initView();
+    }
 
-        SwitchCompat switchCompat = findViewById(R.id.sw);
-        RecyclerView recyclerView = findViewById(R.id.grid_rv);
-
-        GridLayoutManager verticalManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
-        GridLayoutManager horizontalManager = new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL, false);
-
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(horizontalManager);
-        switchCompat.setOnCheckedChangeListener((buttonView, isChecked) -> {
+    private void initView() {
+        gridBinding.gridRv.setHasFixedSize(true);
+        gridBinding.gridRv.setLayoutManager(horizontalManager);
+        gridBinding.sw.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                recyclerView.setLayoutManager(verticalManager);
+                gridBinding.gridRv.setLayoutManager(verticalManager);
             } else {
-                recyclerView.setLayoutManager(horizontalManager);
+                gridBinding.gridRv.setLayoutManager(horizontalManager);
             }
         });
-        recyclerView.setAdapter(new GridAdapter());
+        gridBinding.gridRv.setAdapter(gridAdapter);
     }
 }
