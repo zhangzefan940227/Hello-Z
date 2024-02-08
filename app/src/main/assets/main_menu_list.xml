@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<main_menu>
+    <activity>
+        <title>Animation</title>
+        <jump>com.main.app.animation.AnimationActivity</jump>
+    </activity>
+
+    <activity>
+        <title>RecyclerView</title>
+        <jump>com.main.app.recycler.RecyclerActivity</jump>
+    </activity>
+</main_menu>

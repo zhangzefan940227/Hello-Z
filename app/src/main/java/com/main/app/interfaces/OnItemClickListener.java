@@ -1,4 +1,4 @@
-package com.main.app.utils;
+package com.main.app.interfaces;
 
 import android.view.View;
 

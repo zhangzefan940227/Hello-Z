@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<recyclerview_menu>
+    <activity>
+        <title>垂直</title>
+        <jump>com.main.app.recycler.base.VerticalActivity</jump>
+    </activity>
+
+    <activity>
+        <title>水平</title>
+        <jump>com.main.app.recycler.base.HorizontalActivity</jump>
+    </activity>
+
+    <activity>
+        <title>网格</title>
+        <jump>com.main.app.recycler.base.GridActivity</jump>
+    </activity>
+
+    <activity>
+        <title>瀑布</title>
+        <jump>com.main.app.recycler.base.WaterFallActivity</jump>
+    </activity>
+</recyclerview_menu>

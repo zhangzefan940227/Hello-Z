@@ -10,24 +10,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.main.app.R;
 import com.main.app.databinding.ActivityRecyclerBinding;
-import com.main.app.recycler.base.GridActivity;
-import com.main.app.recycler.base.HorizontalActivity;
-import com.main.app.recycler.base.VerticalActivity;
-import com.main.app.recycler.base.WaterFallActivity;
+import com.main.app.model.MenuModel;
 import com.main.app.utils.BaseAdapter;
 import com.main.app.utils.BaseViewHolder;
+import com.main.app.utils.XmlPullParserUtils;
 
-import java.util.ArrayList;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Objects;
 
 public class RecyclerActivity extends AppCompatActivity {
 
     private ActivityRecyclerBinding activityRecyclerBinding;
 
-    private List<String> mBaseJumpList;
-    private List<String> mAdvanceJumpList;
-    private List<Class<?>> mBaseJumpActivity;
-    private List<Class<?>> mAdvanceJumpActivity;
+    private List<MenuModel> mBaseMenuModelList;
+    private List<MenuModel> mAdvanceMenuModelList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +34,29 @@ public class RecyclerActivity extends AppCompatActivity {
     }
 
     private void init() {
-        initDataBase();
-        initDataAdvance();
-        initViewBase();
-        initViewAdvance();
+        basicInitData();
+        basicInitView();
+
+        advancedInitData();
+        advancedInitView();
     }
 
-    private void initViewBase() {
+    private void basicInitData() {
+        try {
+            InputStream menuStream = Objects.requireNonNull(getClass().getClassLoader()).
+                    getResourceAsStream("assets/recyclerview_basic_menu_list.xml");
+            mBaseMenuModelList = XmlPullParserUtils.getMenuList(menuStream);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void basicInitView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        BaseAdapter<String> baseAdapter = new BaseAdapter<>(mBaseJumpList, new BaseAdapter.IBindDataListener<String>() {
+        BaseAdapter<MenuModel> baseAdapter = new BaseAdapter<>(mBaseMenuModelList, new BaseAdapter.IBindDataListener<MenuModel>() {
             @Override
-            public void onBindViewHolder(String content, BaseViewHolder viewHolder, int type, int position) {
-                viewHolder.setText(R.id.item_recycler_tv, content);
+            public void onBindViewHolder(MenuModel model, BaseViewHolder viewHolder, int type, int position) {
+                viewHolder.setText(R.id.item_recycler_tv, model.getTitle());
             }
 
             @Override
@@ -69,30 +77,26 @@ public class RecyclerActivity extends AppCompatActivity {
         activityRecyclerBinding.recyclerRv.setLayoutManager(layoutManager);
         activityRecyclerBinding.recyclerRv.setAdapter(baseAdapter);
         baseAdapter.setClickListener((view, position) -> {
-            jumpActivity(mBaseJumpActivity.get(position));
+            startActivity(new Intent(this, mBaseMenuModelList.get(position).getJumpToWhere()));
         });
     }
 
-    private void initDataBase() {
-        mBaseJumpList = new ArrayList<>();
-        mBaseJumpList.add(getString(R.string.vertical));
-        mBaseJumpList.add(getString(R.string.horizontal));
-        mBaseJumpList.add(getString(R.string.grid));
-        mBaseJumpList.add(getString(R.string.water_fall));
-
-        mBaseJumpActivity = new ArrayList<>();
-        mBaseJumpActivity.add(VerticalActivity.class);
-        mBaseJumpActivity.add(HorizontalActivity.class);
-        mBaseJumpActivity.add(GridActivity.class);
-        mBaseJumpActivity.add(WaterFallActivity.class);
+    private void advancedInitData() {
+        try {
+            InputStream menuStream = Objects.requireNonNull(getClass().getClassLoader()).
+                    getResourceAsStream("assets/recyclerview_advanced_menu_list.xml");
+            mAdvanceMenuModelList = XmlPullParserUtils.getMenuList(menuStream);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private void initViewAdvance() {
+    private void advancedInitView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        BaseAdapter<String> baseAdapter = new BaseAdapter<>(mAdvanceJumpList, new BaseAdapter.IBindDataListener<String>() {
+        BaseAdapter<MenuModel> baseAdapter = new BaseAdapter<>(mAdvanceMenuModelList, new BaseAdapter.IBindDataListener<MenuModel>() {
             @Override
-            public void onBindViewHolder(String content, BaseViewHolder viewHolder, int type, int position) {
-                viewHolder.setText(R.id.item_recycler_tv, content);
+            public void onBindViewHolder(MenuModel model, BaseViewHolder viewHolder, int type, int position) {
+                viewHolder.setText(R.id.item_recycler_tv, model.getTitle());
             }
 
             @Override
@@ -113,19 +117,7 @@ public class RecyclerActivity extends AppCompatActivity {
         activityRecyclerBinding.recyclerRv2.setLayoutManager(layoutManager);
         activityRecyclerBinding.recyclerRv2.setAdapter(baseAdapter);
         baseAdapter.setClickListener((view, position) -> {
-            jumpActivity(mAdvanceJumpActivity.get(position));
+            startActivity(new Intent(this, mAdvanceMenuModelList.get(position).getJumpToWhere()));
         });
-    }
-
-    private void initDataAdvance() {
-        mAdvanceJumpList = new ArrayList<>();
-        mAdvanceJumpList.add("test");
-
-        mAdvanceJumpActivity = new ArrayList<>();
-        mAdvanceJumpActivity.add(null);
-    }
-
-    public void jumpActivity(final Class<?> clazz) {
-        startActivity(new Intent(this, clazz));
     }
 }

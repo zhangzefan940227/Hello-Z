@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.main.app.interfaces.OnItemClickListener;
+
 import java.util.List;
 
 public class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
@@ -65,18 +67,6 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
         return mList == null ? 30 : mList.size();
     }
 
-
-//    // 插入一项数据
-//    public void insert(T item, int position) {
-//        mList.add(position, item);
-//        notifyItemInserted(position);
-//    }
-//
-//    // 删除一项数据
-//    public void remove(int position) {
-//        mList.remove(position);
-//        notifyItemRemoved(position);
-//    }
 
     public void setClickListener(OnItemClickListener listener) {
         clickListener = listener;

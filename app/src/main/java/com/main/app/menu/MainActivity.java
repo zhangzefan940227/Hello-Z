@@ -9,40 +9,81 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.main.app.R;
-import com.main.app.animation.AnimationActivity;
 import com.main.app.databinding.ActivityMainBinding;
-import com.main.app.recycler.RecyclerActivity;
+import com.main.app.model.MenuModel;
 import com.main.app.utils.BaseAdapter;
 import com.main.app.utils.BaseViewHolder;
+import com.main.app.utils.LogUtils;
+import com.main.app.utils.XmlPullParserUtils;
 
-import java.util.ArrayList;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
     private ActivityMainBinding mainBinding;
     private LinearLayoutManager mLayoutManager;
-    private BaseAdapter<String> baseAdapter;
-    private List<String> mJumpToList;
-    private List<Class<?>> mJumpToActivity;
+    private BaseAdapter<MenuModel> baseAdapter;
+    private List<MenuModel> mMainMenuModelList;
 
-//    private Map<View, Class<?>> mJumpToMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         initData();
-        initRecyclerView();
+        initView();
     }
 
-    public void initRecyclerView() {
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LogUtils.i(TAG, "onStart");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        LogUtils.i(TAG, "onRestart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LogUtils.i(TAG, "onResume");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LogUtils.i(TAG, "onPause");
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LogUtils.i(TAG, "onStop");
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LogUtils.i(TAG, "onDestroy");
+
+    }
+
+    public void initView() {
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mainBinding.mainRv.setLayoutManager(mLayoutManager);
 
-        baseAdapter = new BaseAdapter<>(mJumpToList, new BaseAdapter.IBindDataListener<String>() {
+        baseAdapter = new BaseAdapter<>(mMainMenuModelList, new BaseAdapter.IBindDataListener<MenuModel>() {
             @Override
-            public void onBindViewHolder(String content, BaseViewHolder viewHolder, int type, int position) {
-                viewHolder.setText(R.id.item_main_tv, content);
+            public void onBindViewHolder(MenuModel model, BaseViewHolder viewHolder, int type, int position) {
+                viewHolder.setText(R.id.item_main_tv, model.getTitle());
             }
 
             @Override
@@ -63,21 +104,16 @@ public class MainActivity extends AppCompatActivity {
         mainBinding.mainRv.setAdapter(baseAdapter);
 
         baseAdapter.setClickListener(((view, position) -> {
-            jumpActivity(mJumpToActivity.get(position));
+            startActivity(new Intent(this, mMainMenuModelList.get(position).getJumpToWhere()));
         }));
     }
 
     public void initData() {
-        mJumpToList = new ArrayList<>();
-        mJumpToList.add(getString(R.string.property_animation));
-        mJumpToList.add(getString(R.string.recycler_view));
-
-        mJumpToActivity = new ArrayList<>();
-        mJumpToActivity.add(AnimationActivity.class);
-        mJumpToActivity.add(RecyclerActivity.class);
-    }
-
-    public void jumpActivity(final Class<?> clazz) {
-        startActivity(new Intent(this, clazz));
+        try {
+            InputStream menuStream = Objects.requireNonNull(getClass().getClassLoader()).getResourceAsStream("assets/main_menu_list.xml");
+            mMainMenuModelList = XmlPullParserUtils.getMenuList(menuStream);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
