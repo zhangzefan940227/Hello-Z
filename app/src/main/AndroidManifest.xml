@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
     <!--     读写权限-->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
     <application
@@ -27,12 +27,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".animation.AnimationActivity" />
-        <activity android:name=".recycler.RecyclerActivity" />
+        <activity android:name=".menu.RecyclerActivity" />
         <activity android:name=".recycler.base.VerticalActivity" />
         <activity android:name=".recycler.base.HorizontalActivity" />
         <activity android:name=".recycler.base.GridActivity" />
         <activity android:name=".recycler.base.WaterFallActivity" />
-
+        <activity android:name=".navigation.NavigationActivity"
+            android:exported="false"
+            android:label="@string/title_home" />
+        <activity android:name=".databasetest.DataBaseTestActivity" />
 
     </application>
 

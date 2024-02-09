@@ -1,4 +1,4 @@
-package com.main.app.recycler;
+package com.main.app.menu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.main.app.R;
 import com.main.app.databinding.ActivityRecyclerBinding;
-import com.main.app.model.MenuModel;
+import com.main.app.menu.model.MenuModel;
 import com.main.app.utils.BaseAdapter;
 import com.main.app.utils.BaseViewHolder;
 import com.main.app.utils.XmlPullParserUtils;
@@ -31,6 +31,14 @@ public class RecyclerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activityRecyclerBinding = DataBindingUtil.setContentView(this, R.layout.activity_recycler);
         init();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+         activityRecyclerBinding = null;
+         mBaseMenuModelList = null;
+         mAdvanceMenuModelList = null;
     }
 
     private void init() {

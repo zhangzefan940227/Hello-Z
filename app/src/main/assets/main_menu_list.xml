@@ -8,6 +8,11 @@
 
     <activity>
         <title>RecyclerView</title>
-        <jump>com.main.app.recycler.RecyclerActivity</jump>
+        <jump>com.main.app.menu.RecyclerActivity</jump>
+    </activity>
+
+    <activity>
+        <title>NavigationBar</title>
+        <jump>com.main.app.navigation.NavigationActivity</jump>
     </activity>
 </main_menu>

@@ -2,7 +2,7 @@ package com.main.app.utils;
 
 import android.util.Xml;
 
-import com.main.app.model.MenuModel;
+import com.main.app.menu.model.MenuModel;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;

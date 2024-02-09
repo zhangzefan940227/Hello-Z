@@ -10,7 +10,7 @@ import android.os.Bundle;
 
 import com.main.app.R;
 import com.main.app.databinding.ActivityMainBinding;
-import com.main.app.model.MenuModel;
+import com.main.app.menu.model.MenuModel;
 import com.main.app.utils.BaseAdapter;
 import com.main.app.utils.BaseViewHolder;
 import com.main.app.utils.LogUtils;
@@ -72,6 +72,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+         mainBinding = null;
+         mLayoutManager = null;
+         baseAdapter = null;
+         mMainMenuModelList = null;
         LogUtils.i(TAG, "onDestroy");
 
     }

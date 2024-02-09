@@ -19,4 +19,8 @@
     <string name="anim_scaleY">竖直缩放动画</string>
     <string name="notes">这是一段文本</string>
     <string name="anim">动画</string>
+    <string name="title_home">首页</string>
+    <string name="title_video">视频</string>
+    <string name="title_message">消息</string>
+    <string name="title_mine">我的</string>
 </resources>
